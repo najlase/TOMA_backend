@@ -7,8 +7,18 @@ class AppointmentService {
         return appointmentModel.find({patient: mongoose.Types.ObjectId(id)}).populate('doctor')
     }
 
+    async filterPatientAppointments(id, filterData, appointmentFilterData) {
+        appointmentFilterData.patient = mongoose.Types.ObjectId(id)
+        return appointmentModel.find(appointmentFilterData).populate(
+            {
+                path: 'doctor',
+                match: filterData
+            }
+        )
+    }
+
     async getDoctorAppointments(id) {
-        return appointmentModel.find({doctor: mongoose.Types.ObjectId(id)})
+        return appointmentModel.find({doctor: mongoose.Types.ObjectId(id)}).populate('patient')
     }
 
     async createPatientAppointment(patientId, doctorId, date) {

@@ -8,10 +8,11 @@ const doctorModel = require('../models/doctorModel')
 class AuthApi {
 
     async login(req, res) {
-        console.log('logginIn')
         const {email, password} = req.body
         const user = (await UserModel.findOne({email, password})).toObject()
         delete user.password
+
+        console.log('logginIn', user)
 
         if (user.role == 'Patient') {
             user.profile = await patientModel.findOne({User: user._id})
