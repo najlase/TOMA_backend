@@ -23,6 +23,5 @@ birthday: {
 },
 img: String
 });
-
-let model =  mongoose.model("Patient", PatientSchema)
-module.exports = model
+ 
+module.exports = mongoose.model("Patient", PatientSchema)

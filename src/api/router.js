@@ -18,4 +18,5 @@ router.post('/doctors/filter', (req, res, next) => authMiddleware.authorize(req,
 
 router.get('/patient/:id/my-doctors', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.getDoctors)
 router.post('/patient/:id/my-doctors/filter', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.filterDoctors)
+router.patch('/patient/:id/profile', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.updateProfile)
 module.exports = router

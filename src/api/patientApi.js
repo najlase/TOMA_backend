@@ -3,15 +3,11 @@ const patientsService = require('../services/patientsService')
 class PatientsApi {
 
   async getDoctors(req, res) {
-    if(req.user.role == 'Patient' && req.params.id !== req.user.profile._id)
-      return res.sendStatus(403)
 
     res.send((await patientsService.getPatientDoctors(req.params.id)).doctors)
   }
 
   async filterDoctors(req, res) {
-    if(req.user.role == 'Patient' && req.params.id !== req.user.profile._id)
-      return res.sendStatus(403)
 
     let filterData = {};
     if(req.body.specialty)
@@ -25,6 +21,13 @@ class PatientsApi {
     }
 
     res.send((await patientsService.filterPatientDoctors(req.params.id, filterData)).doctors)
+  }
+
+  async updateProfile(req, res){
+    console.log(req.params.id)
+    console.log(req.body)
+   
+    res.send(await  patientsService.updateProfile(req.params.id, req.body))
   }
 }
 
