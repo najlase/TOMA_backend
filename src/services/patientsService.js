@@ -23,9 +23,11 @@ class PatientService {
         await user.save()
 
         let patient = await patientModel.findOne({User: id})
-        console.log(patient)
         patient.firstName = profileData.firstName
         patient.lastName = profileData.lastName
+        if (profileData.profilePicture != ""){
+            patient.img = profileData.profilePicture
+        }
         await patient.save()
 
         user = user.toObject()

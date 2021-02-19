@@ -24,9 +24,7 @@ class PatientsApi {
   }
 
   async updateProfile(req, res){
-    console.log(req.params.id)
     console.log(req.body)
-   
     res.send(await  patientsService.updateProfile(req.params.id, req.body))
   }
 }
