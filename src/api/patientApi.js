@@ -1,4 +1,5 @@
 const patientsService = require('../services/patientsService')
+const connectionService = require('../services/connectionService')
 
 class PatientsApi {
 
@@ -26,6 +27,16 @@ class PatientsApi {
   async updateProfile(req, res){
     console.log(req.body)
     res.send(await  patientsService.updateProfile(req.params.id, req.body))
+  }
+
+  async connect(req, res) {
+    await connectionService.createConnectionRequest(req.params.id, req.params.doctorId)
+    res.send({});
+  }
+
+  async removeConnectionRequest(req, res) {
+    await connectionService.removeConnectionRequest(req.params.id, req.params.doctorId)
+    res.send({});
   }
 }
 
