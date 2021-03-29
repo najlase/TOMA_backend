@@ -8,7 +8,12 @@ class PatientsApi {
     res.send((await patientsService.getPatientDoctors(req.params.id)).doctors)
   }
   async getInvitations(req, res) {
-    res.send((await patientsService.getInvitations(req.user.profile._id)))
+    res.send(await patientsService.getInvitations(req.user.profile._id))
+  }
+
+  async removeConnection(req, res) {
+
+    res.send(await connectionService.removeConnection(req.params.doctorId, req.user.profile._id))
   }
 
   async filterDoctors(req, res) {

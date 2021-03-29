@@ -30,6 +30,15 @@ const DoctorSchema = new mongoose.Schema({
             type: Date
         }
     }],
+    archievedPatients: [{
+        patient: {
+            type: mongoose.Types.ObjectId,
+            ref: 'Patient',
+        },
+        date: {
+            type: Date
+        }
+    }],
 img: String
 });
 

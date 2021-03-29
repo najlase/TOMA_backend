@@ -17,6 +17,16 @@ class DoctorService {
         let doctor = await doctorModel.findOne({_id: id}).populate("connectionRequests.patient")
         return doctor.connectionRequests
     }
+
+    async getArchievedPatients(id) {
+        let doctor = await doctorModel.findOne({_id: id}).populate("archievedPatients.patient")
+        return doctor.archievedPatients
+    }
+
+    async getPatients(id) {
+        let doctor = await doctorModel.findOne({_id: id}).populate("patients")
+        return doctor.patients
+    }
 }
 
 module.exports = new DoctorService()

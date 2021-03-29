@@ -10,7 +10,13 @@ router.get('/patient/:id/appointments', (req, res, next) => authMiddleware.autho
 router.post('/patient/:id/appointments/filter', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), appointmentsApi.filterPatientAppointments)
 router.get('/doctor/:id/appointments', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), appointmentsApi.getDoctorAppointments)
 router.get('/doctor/requests', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), doctorsApi.getInvitations)
+router.get('/doctor/requests/accept/:patientId', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), doctorsApi.acceptInvitation)
+router.get('/doctor/requests/reject/:patientId', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), doctorsApi.rejectInvitation)
 router.post('/appointments/make', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), appointmentsApi.createPatientAppointment)
+router.get('/doctor/patients/archieved', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), doctorsApi.getArchievedPatients)
+router.get('/doctor/my-patients', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), doctorsApi.getPatients)
+
+
 router.post('/appointments/:id/confirm', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), appointmentsApi.confirmAppointment)
 router.post('/appointments/:id/reject', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), appointmentsApi.rejectAppointment)
 
@@ -24,4 +30,6 @@ router.post('/patient/:id/my-doctors/filter', (req, res, next) => authMiddleware
 router.patch('/patient/:id/profile', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.updateProfile)
 router.post('/patient/:id/connect/doctor/:doctorId', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.connect)
 router.delete('/patient/:id/connect/doctor/:doctorId', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.removeConnectionRequest)
+router.delete('/patient/connections/doctor/:doctorId', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.removeConnection)
+
 module.exports = router
