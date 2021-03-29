@@ -12,6 +12,11 @@ class DoctorService {
     async filter(filterData) {
         return doctorModel.find(filterData)
     }
+
+    async getInvitations(id){
+        let doctor = await doctorModel.findOne({_id: id}).populate("connectionRequests.patient")
+        return doctor.connectionRequests
+    }
 }
 
 module.exports = new DoctorService()

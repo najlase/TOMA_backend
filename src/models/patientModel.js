@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const PatientSchema = new mongoose.Schema({
     User: {
         type: mongoose.Types.ObjectId,
-        ref: 'User',
+        ref: 'User'
     },
     firstName: {
         type: String,
@@ -15,7 +15,7 @@ const PatientSchema = new mongoose.Schema({
     },
     doctors: [{
         type: mongoose.Types.ObjectId,
-        ref: 'Doctor',
+        ref: 'Doctor'
     }],
     birthday: {
         type: Date,
@@ -24,13 +24,21 @@ const PatientSchema = new mongoose.Schema({
     connectionRequests: [{
         doctor: {
             type: mongoose.Types.ObjectId,
-            ref: 'Doctor',
+            ref: 'Doctor'
         },
         date: {
             type: Date
+        },
+        state: {
+            type: String,
+        enum : ['Pending','Accepted', 'Rejected'],
+        default: 'Pending'
         }
     }],
-    img: String
+    img: {
+        type: String,
+        default: "https://tradingforwomen.com/wp-content/uploads/2018/05/default-user.png"
+    }
 });
  
 module.exports = mongoose.model("Patient", PatientSchema)

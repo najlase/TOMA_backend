@@ -4,10 +4,12 @@ const authMiddleware = require('../auth/authMiddleware')
 const appointmentsApi = require('./appointmentsApi')
 const patientApi = require('./patientApi')
 const doctorsApi = require('./doctorApi')
+const doctorApi = require('./doctorApi')
 
 router.get('/patient/:id/appointments', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), appointmentsApi.getPatientAppointments)
 router.post('/patient/:id/appointments/filter', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), appointmentsApi.filterPatientAppointments)
 router.get('/doctor/:id/appointments', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), appointmentsApi.getDoctorAppointments)
+router.get('/doctor/requests', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), doctorsApi.getInvitations)
 router.post('/appointments/make', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), appointmentsApi.createPatientAppointment)
 router.post('/appointments/:id/confirm', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), appointmentsApi.confirmAppointment)
 router.post('/appointments/:id/reject', (req, res, next) => authMiddleware.authorize(req, res, next, 'Doctor'), appointmentsApi.rejectAppointment)
@@ -17,6 +19,7 @@ router.post('/doctors/filter', (req, res, next) => authMiddleware.authorize(req,
 
 
 router.get('/patient/:id/my-doctors', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.getDoctors)
+router.get('/patient/requests', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.getInvitations)
 router.post('/patient/:id/my-doctors/filter', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.filterDoctors)
 router.patch('/patient/:id/profile', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.updateProfile)
 router.post('/patient/:id/connect/doctor/:doctorId', (req, res, next) => authMiddleware.authorize(req, res, next, 'Patient'), patientApi.connect)

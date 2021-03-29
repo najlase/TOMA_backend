@@ -7,6 +7,11 @@ class PatientService {
         return patientModel.findOne({ _id: id }).populate('doctors')
     }
 
+    async getInvitations(id){
+        let patient = await patientModel.findOne({_id: id}).populate("connectionRequests.doctor")
+        return patient.connectionRequests
+    }
+
     async filterPatientDoctors(id, filterData) {
         return patientModel.findOne({ _id: id }).populate({
             path: 'doctors',

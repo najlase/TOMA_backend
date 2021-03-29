@@ -5,6 +5,9 @@ class DoctorsApi {
   async getAll(req, res) {
     res.send((await doctorsService.getAll()))
   }
+  async getInvitations(req, res) {
+    res.send((await doctorsService.getInvitations(req.user.profile._id)))
+  }
 
   async filter(req, res) {
     let filterData = {};

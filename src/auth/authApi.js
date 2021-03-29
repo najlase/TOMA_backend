@@ -25,8 +25,8 @@ class AuthApi {
 
 
     async register(req, res) {
-        const {email, password, role, firstName, lastName, birthday} = req.body
-        const user = (await UserModel.create({email, password, role})).toObject()
+        const {email, password, firstName, lastName, birthday} = req.body
+        const user = (await UserModel.create({email, password, role: "Patient"})).toObject()
         delete user.password
         if (user.role == 'Patient') {
             user.profile = await patientModel.create({User: user._id, firstName, lastName, birthday})
