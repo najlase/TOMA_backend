@@ -15,6 +15,7 @@ date: {
     type: Date,
     required: true
 },
+note: String,
 status: {
     type: String,
     enum: ["pending", "confirmed", "rejected"],

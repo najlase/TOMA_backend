@@ -41,7 +41,7 @@ class AppointmentsApi {
   }
 
   async createPatientAppointment(req, res) {   
-    res.send(await appointmentService.createPatientAppointment(req.user.profile._id, req.body.doctor, req.body.date))
+    res.send(await appointmentService.createPatientAppointment(req.user.profile._id, req.body.doctorId, req.body.date, req.body.note))
   }
 
   async confirmAppointment(req, res) {   

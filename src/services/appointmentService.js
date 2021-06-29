@@ -21,11 +21,12 @@ class AppointmentService {
         return appointmentModel.find({doctor: mongoose.Types.ObjectId(id)}).populate('patient')
     }
 
-    async createPatientAppointment(patientId, doctorId, date) {
+    async createPatientAppointment(patientId, doctorId, date, note) {
         return appointmentModel.create({
             patient: mongoose.Types.ObjectId(patientId),
             doctor: mongoose.Types.ObjectId(doctorId),
-            date
+            date,
+            note
         })
     }
 
